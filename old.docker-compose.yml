@@ -2,7 +2,9 @@ version: '3.7'
 
 services:
   api-servicos:
-    image: rafaelptr/api-servicos
+    build:
+      context: ./
+      dockerfile: Dockerfile
     ports:
       - "8080:8080" 
     restart: always
@@ -14,6 +16,21 @@ services:
       SPRING_DATASOURCE_PASSWORD: findsupplier   
     networks:
       - backend
+      - frontend
+
+  # find-supplier:
+  #   build:
+  #     context: find-supplier 
+  #     dockerfile: Dockerfile
+  #     args:
+  #       REACT_APP_API_BASE_URL: http://127.0.0.1:8080/api/v1
+  #   ports:
+  #     - "9090:80"
+  #   restart: always
+  #   depends_on:
+  #     - app-server
+  #   networks:
+  #     - frontend  
 
   db:
     image: mysql:latest
@@ -30,8 +47,11 @@ services:
     networks:
       - backend  
   
+# Volumes
 volumes:
   db-data:
 
+# Networks to be created to facilitate communication between containers
 networks:
-  backend: 
+  backend:
+  frontend: 
