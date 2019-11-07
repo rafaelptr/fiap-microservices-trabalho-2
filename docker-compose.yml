@@ -12,7 +12,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db-servicos:3306/findsupplier?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
     networks:
       - backend
 
