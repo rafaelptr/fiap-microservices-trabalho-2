@@ -4,14 +4,15 @@ services:
   api-servicos:
     image: rafaelptr/api-servicos:0.0.1
     ports:
-      - "8080:8080" 
+      - "8080:8080"
     restart: always
-    depends_on: 
-      - db-servicos 
+    depends_on:
+      - db-servicos
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db-servicos:3306/findsupplier?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
       SPRING_DATASOURCE_USERNAME: findsupplier
-      SPRING_DATASOURCE_PASSWORD: findsupplier   
+      SPRING_DATASOURCE_PASSWORD: findsupplier
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
     networks:
       - backend
 
@@ -21,17 +22,17 @@ services:
       - "3306:3306"
     restart: always
     environment:
-      MYSQL_DATABASE: 
+      MYSQL_DATABASE:
       MYSQL_USER: findsupplier
       MYSQL_PASSWORD: findsupplier
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - db-servicos-data:/var/lib/mysql
     networks:
-      - backend  
-  
+      - backend
+
 volumes:
   db-servicos-data:
 
 networks:
-  backend: 
+  backend:
