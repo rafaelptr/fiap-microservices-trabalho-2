@@ -9,7 +9,7 @@
   </parent>
   <groupId>br.com.fiap.microservices</groupId>
   <artifactId>api-servicos</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>demo</name>
   <description>Demo project for Spring Boot</description>
   <properties>
@@ -98,6 +98,7 @@
         <artifactId>dockerfile-maven-plugin</artifactId>
         <version>1.4.13</version>
         <configuration>
+          <tag>${project.version}</tag>
           <repository>${docker.image.prefix}/${project.artifactId}</repository>
         </configuration>
         <executions>
