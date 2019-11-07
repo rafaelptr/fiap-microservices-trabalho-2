@@ -10,8 +10,8 @@ services:
       - db-servicos
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db-servicos:3306/findsupplier?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false
-      SPRING_DATASOURCE_USERNAME: findsupplier
-      SPRING_DATASOURCE_PASSWORD: findsupplier
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
     networks:
       - backend
@@ -22,9 +22,9 @@ services:
       - "3306:3306"
     restart: always
     environment:
-      MYSQL_DATABASE:
-      MYSQL_USER: findsupplier
-      MYSQL_PASSWORD: findsupplier
+      MYSQL_DATABASE: findsupplier
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - db-servicos-data:/var/lib/mysql
