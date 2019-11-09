@@ -81,7 +81,7 @@ networks:
     networks:
       - backend
 
-  db-clientes:
+  db-contratacao:
     image: mysql:latest
     ports:
       - "3308:3308"
