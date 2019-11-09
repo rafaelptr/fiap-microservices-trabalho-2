@@ -14,7 +14,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     networks:
-      - backend
+      - rede
   db-servicos:
     image: mysql:latest
     ports:
@@ -28,7 +28,15 @@ services:
     volumes:
       - db-servicos-data:/var/lib/mysql
     networks:
-      - backend
+      - rede
+      
+  app-findsupplier:
+    image: rafaelptr/findsupplier:0.0.1
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      - rede
 
 ## clientes      
   # api-clientes:
@@ -43,7 +51,7 @@ services:
   #     SPRING_DATASOURCE_USERNAME: root
   #     SPRING_DATASOURCE_PASSWORD: root
   #   networks:
-  #     - backend
+  #     - rede
 
   # db-clientes:
   #   image: mysql:latest
@@ -58,7 +66,7 @@ services:
   #   volumes:
   #     - db-clientes-data:/var/lib/mysql
   #   networks:
-  #     - backend
+  #     - rede
 
 ## contratacao
   # api-contratacao:
@@ -73,7 +81,7 @@ services:
   #     SPRING_DATASOURCE_USERNAME: root
   #     SPRING_DATASOURCE_PASSWORD: root
   #   networks:
-  #     - backend
+  #     - rede
 
   # db-contratacao:
   #   image: mysql:latest
@@ -88,7 +96,7 @@ services:
   #   volumes:
   #     - db-contratacao-data:/var/lib/mysql
   #   networks:
-  #     - backend
+  #     - rede
 
 ## proposta
   # api-proposta:
@@ -103,7 +111,7 @@ services:
   #     SPRING_DATASOURCE_USERNAME: root
   #     SPRING_DATASOURCE_PASSWORD: root
   #   networks:
-  #     - backend
+  #     - rede
 
   # db-proposta:
   #   image: mysql:latest
@@ -118,7 +126,7 @@ services:
   #   volumes:
   #     - db-proposta-data:/var/lib/mysql
   #   networks:
-  #     - backend
+  #     - rede
 
 volumes:
   db-servicos-data:
@@ -127,4 +135,4 @@ volumes:
   # db-proposta-data:
 
 networks:
-  backend:
+  rede:

@@ -1,0 +1,1 @@
+docker build -t rafaelptr/findsupplier:0.0.1 .
