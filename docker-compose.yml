@@ -60,12 +60,6 @@ services:
     networks:
       - backend
 
-volumes:
-  db-clientes-data:
-
-networks:
-  backend:
-
 ## contratacao
   api-contratacao:
     image: rafaelptr/api-contratacoes:0.0.1
@@ -95,12 +89,6 @@ networks:
       - db-contratacao-data:/var/lib/mysql
     networks:
       - backend
-
-volumes:
-  db-contratacao-data:
-
-networks:
-  backend:
 
 ## proposta
   api-proposta:
@@ -133,7 +121,10 @@ networks:
       - backend
 
 volumes:
+  db-servicos-data:
+  db-contratacao-data:
   db-proposta-data:
+  db-clientes-data:
 
 networks:
   backend:
