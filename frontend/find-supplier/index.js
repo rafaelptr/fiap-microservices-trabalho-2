@@ -5,6 +5,7 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 8090;
+const url = "http://localhost:8080";   
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -13,11 +14,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/assets', express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => { 
-    var url = "http://ip172-18-0-29-bn3h6v8ajsig009nhal0-8080.direct.labs.play-with-docker.com";   
     http.get(url+'/api/v1/servicos', (resp) => {    
-        console.log('STATUS: ' + resp.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(resp.headers));
-    
         var chunks = [];
 
         resp.on("data", function (chunk) {
