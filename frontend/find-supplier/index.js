@@ -57,7 +57,7 @@ app.post('/salvar', (req, res) => {
         }
     }
       
-    https.request(options, (resp) => {
+    http.request(options, (resp) => {
         console.log('statusCode: '+ resp.statusCode);
         var chunks = [];      
         
@@ -94,7 +94,7 @@ app.post('/atualizar', (req, res) => {
         }
     }
       
-    https.request(options, (resp) => {
+    http.request(options, (resp) => {
         console.log('statusCode: '+ resp.statusCode);
         var chunks = [];      
         
@@ -120,7 +120,7 @@ app.post('/deletar', (req, res) => {
         method: 'DELETE',
     }
       
-    https.request(options, (resp) => {
+    http.request(options, (resp) => {
         console.log('statusCode: '+ resp.statusCode);
         var chunks = [];      
         
