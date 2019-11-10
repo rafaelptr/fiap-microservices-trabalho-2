@@ -5,7 +5,7 @@ services:
   api-servicos:
     image: rafaelptr/api-servicos:0.0.1
     ports:
-      - "8080:8080"
+      - "8081:8081"
     restart: always
     depends_on:
       - db-servicos
@@ -33,7 +33,7 @@ services:
   app-findsupplier:
     image: rafaelptr/findsupplier:0.0.1
     ports:
-      - "80:80"
+      - "8080:8080"
     restart: always
     networks:
       - rede
