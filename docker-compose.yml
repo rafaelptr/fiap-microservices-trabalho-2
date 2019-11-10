@@ -35,6 +35,8 @@ services:
     image: rafaelptr/findsupplier:0.0.1
     ports:
       - "8080:8080"
+    depends_on:
+      - api-servicos
     restart: always
     networks:
       - rede
