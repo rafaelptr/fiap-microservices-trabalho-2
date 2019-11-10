@@ -2,6 +2,6 @@ wget "https://raw.githubusercontent.com/rafaelptr/fiap-microservices-trabalho-2/
 docker-compose up
 
 
-8080: frontend
-8081: servico
-3306: db-servico
+8080: frontend  
+8081: servico  
+3306: db-servico  
