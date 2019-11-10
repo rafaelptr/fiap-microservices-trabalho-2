@@ -37,27 +37,111 @@ app.get('/', (req, res) => {
 });
 
 app.post('/salvar', (req, res) => {
-    let data = {product_name: req.body.product_name, product_price: req.body.product_price};
-    let sql = "INSERT INTO product SET ?";
-    let query = conn.query(sql, data, (err, results) => {
-        if (err) throw err;
-        res.redirect('/');
+    
+    let id = req.body.id;
+
+    const data = JSON.stringify({
+        id: req.body.id,
+        nome_servico: req.body.nome_servico,
+        descricao_servico: req.body.descricao_servico
+    });
+      
+    const options = {
+        hostname: "localhost",
+        port: 8081,
+        path: '/api/v1/servicos/'+id,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length
+        }
+    }
+      
+    const req = https.request(options, (resp) => {
+        console.log('statusCode: '+ resp.statusCode);
+        var chunks = [];      
+        
+        resp.on('data', (d) => {
+            chunks.push(chunk);
+        });
+        
+        resp.on("end", function() {
+            var body = Buffer.concat(chunks);
+        
+            res.render('servicos_view', {
+                 results: JSON.parse(body)._embedded.servicos
+            });   
+
+        });
     });
 });
 
 app.post('/atualizar', (req, res) => {
-    let sql = "UPDATE product SET product_name='" + req.body.product_name + "', product_price='" + req.body.product_price + "' WHERE product_id=" + req.body.id;
-    let query = conn.query(sql, (err, results) => {
-        if (err) throw err;
-        res.redirect('/');
+    
+    let id = req.body.id;
+
+    const data = JSON.stringify({
+        id: req.body.id,
+        nome_servico: req.body.nome_servico,
+        descricao_servico: req.body.descricao_servico
+    });
+      
+    const options = {
+        hostname: "localhost",
+        port: 8081,
+        path: '/api/v1/servicos/'+id,
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length
+        }
+    }
+      
+    const req = https.request(options, (resp) => {
+        console.log('statusCode: '+ resp.statusCode);
+        var chunks = [];      
+        
+        resp.on('data', (d) => {
+            chunks.push(chunk);
+        });
+        
+        resp.on("end", function() {
+            var body = Buffer.concat(chunks);
+        
+            res.render('servicos_view', {
+                 results: JSON.parse(body)._embedded.servicos
+            });   
+
+        });
     });
 });
 
-app.post('/deletar', (req, res) => {
-    let sql = "DELETE FROM product WHERE product_id=" + req.body.product_id + "";
-    let query = conn.query(sql, (err, results) => {
-        if (err) throw err;
-        res.redirect('/');
+app.post('/deletar', (req, res) => {    
+    let id = req.body.id;
+
+    const options = {
+        hostname: "localhost",
+        port: 8081,
+        path: '/api/v1/servicos/'+id,
+        method: 'DELETE',
+    }
+      
+    const req = https.request(options, (resp) => {
+        console.log('statusCode: '+ resp.statusCode);
+        var chunks = [];      
+        
+        resp.on('data', (d) => {
+            chunks.push(chunk);
+        });
+        
+        resp.on("end", function() {
+            var body = Buffer.concat(chunks);
+        
+            res.render('servicos_view', {
+                 results: JSON.parse(body)._embedded.servicos
+            });   
+
+        });
     });
 });
 
