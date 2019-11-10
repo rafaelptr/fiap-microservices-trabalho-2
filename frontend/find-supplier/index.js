@@ -5,7 +5,7 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 8080;
-const url = "http://localhost:8081";   
+const url = "http://api-servicos:8081";   
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -57,7 +57,7 @@ app.post('/salvar', (req, res) => {
         }
     }
       
-    const req = https.request(options, (resp) => {
+    https.request(options, (resp) => {
         console.log('statusCode: '+ resp.statusCode);
         var chunks = [];      
         
@@ -67,11 +67,8 @@ app.post('/salvar', (req, res) => {
         
         resp.on("end", function() {
             var body = Buffer.concat(chunks);
-        
-            res.render('servicos_view', {
-                 results: JSON.parse(body)._embedded.servicos
-            });   
-
+            console.log(body);
+            res.redirect('/');
         });
     });
 });
@@ -97,7 +94,7 @@ app.post('/atualizar', (req, res) => {
         }
     }
       
-    const req = https.request(options, (resp) => {
+    https.request(options, (resp) => {
         console.log('statusCode: '+ resp.statusCode);
         var chunks = [];      
         
@@ -107,11 +104,8 @@ app.post('/atualizar', (req, res) => {
         
         resp.on("end", function() {
             var body = Buffer.concat(chunks);
-        
-            res.render('servicos_view', {
-                 results: JSON.parse(body)._embedded.servicos
-            });   
-
+            console.log(body);
+            res.redirect('/');
         });
     });
 });
@@ -126,7 +120,7 @@ app.post('/deletar', (req, res) => {
         method: 'DELETE',
     }
       
-    const req = https.request(options, (resp) => {
+    https.request(options, (resp) => {
         console.log('statusCode: '+ resp.statusCode);
         var chunks = [];      
         
@@ -136,11 +130,8 @@ app.post('/deletar', (req, res) => {
         
         resp.on("end", function() {
             var body = Buffer.concat(chunks);
-        
-            res.render('servicos_view', {
-                 results: JSON.parse(body)._embedded.servicos
-            });   
-
+            console.log(body);
+            res.redirect('/');
         });
     });
 });
