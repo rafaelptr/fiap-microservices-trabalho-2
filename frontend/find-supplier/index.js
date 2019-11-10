@@ -6,8 +6,8 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 8080;
-//const api_host = "api-servicos";
-const api_host = "ip172-18-0-15-bn44rnoajsig00bdv7p0-8081.direct.labs.play-with-docker.com";
+const api_host = "api-servicos";
+//const api_host = "ip172-18-0-15-bn44rnoajsig00bdv7p0-8081.direct.labs.play-with-docker.com";
 const api_port = 8081;
 const url = "http://"+api_host+":"+api_port;   
 
