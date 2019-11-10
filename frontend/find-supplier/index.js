@@ -1,11 +1,15 @@
 const path = require('path');
 const express = require('express');
 const http = require('http');
+var request = require('request');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 8080;
-const url = "http://api-servicos:8081";   
+//const api_host = "api-servicos";
+const api_host = "ip172-18-0-15-bn44rnoajsig00bdv7p0-8081.direct.labs.play-with-docker.com";
+const api_port = 8081;
+const url = "http://"+api_host+":"+api_port;   
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -37,103 +41,62 @@ app.get('/', (req, res) => {
 });
 
 app.post('/salvar', (req, res) => {
-    
-    let id = req.body.id;
+    console.log("salvar");
 
-    const data = JSON.stringify({
-        id: req.body.id,
-        nome_servico: req.body.nome_servico,
-        descricao_servico: req.body.descricao_servico
-    });
-      
-    const options = {
-        hostname: "localhost",
-        port: 8081,
-        path: '/api/v1/servicos/'+id,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': data.length
-        }
-    }
-      
-    http.request(options, (resp) => {
-        console.log('statusCode: '+ resp.statusCode);
-        var chunks = [];      
-        
-        resp.on('data', (d) => {
-            chunks.push(chunk);
-        });
-        
-        resp.on("end", function() {
-            var body = Buffer.concat(chunks);
+    request.post(
+        url+'/api/v1/servicos',
+        {
+            json: {
+                nome_servico: req.body.nome_servico,
+                descricao_servico: req.body.descricao_servico
+            }
+        },
+        function (error, response, body) {
             console.log(body);
+            console.log(error);
+            console.log(response);
             res.redirect('/');
-        });
-    });
+        }
+    );
 });
 
 app.post('/atualizar', (req, res) => {
     
     let id = req.body.id;
+    console.log("atualizar "+id);
 
-    const data = JSON.stringify({
-        id: req.body.id,
-        nome_servico: req.body.nome_servico,
-        descricao_servico: req.body.descricao_servico
-    });
-      
-    const options = {
-        hostname: "localhost",
-        port: 8081,
-        path: '/api/v1/servicos/'+id,
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': data.length
-        }
-    }
-      
-    http.request(options, (resp) => {
-        console.log('statusCode: '+ resp.statusCode);
-        var chunks = [];      
-        
-        resp.on('data', (d) => {
-            chunks.push(chunk);
-        });
-        
-        resp.on("end", function() {
-            var body = Buffer.concat(chunks);
+    request.put(
+        url+'/api/v1/servicos/'+id,
+        {
+            json: {    
+                id: id,
+                nome_servico: req.body.nome_servico,
+                descricao_servico: req.body.descricao_servico
+            }
+        },
+        function (error, response, body) {
             console.log(body);
+            console.log(error);
+            console.log(response);
             res.redirect('/');
-        });
-    });
+        }
+    );
 });
 
 app.post('/deletar', (req, res) => {    
     let id = req.body.id;
+    console.log("deletar "+id);
 
-    const options = {
-        hostname: "localhost",
-        port: 8081,
-        path: '/api/v1/servicos/'+id,
-        method: 'DELETE',
-    }
-      
-    http.request(options, (resp) => {
-        console.log('statusCode: '+ resp.statusCode);
-        var chunks = [];      
-        
-        resp.on('data', (d) => {
-            chunks.push(chunk);
-        });
-        
-        resp.on("end", function() {
-            var body = Buffer.concat(chunks);
+    request.delete(
+        url+'/api/v1/servicos/'+id,
+        {},
+        function (error, response, body) {
             console.log(body);
+            console.log(error);
+            console.log(response);
             res.redirect('/');
-        });
-    });
+        }
+    );
 });
 
 app.listen(port, () => {
